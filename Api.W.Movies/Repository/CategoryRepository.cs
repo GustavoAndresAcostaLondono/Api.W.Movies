@@ -50,10 +50,12 @@ namespace Api.W.Movies.Repository
 
         public async Task<ICollection<Category>> GetCategoriesAsync()
         {
-            return await _context.Categories
+            var categories = await _context.Categories
                 .AsNoTracking()
                 .OrderBy(c => c.Name)
                 .ToListAsync();
+
+            return categories;
         }
 
         public async Task<Category> GetCategoryAsync(int id) // async y await, metodos asincronicos necesitan esto
