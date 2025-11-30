@@ -93,6 +93,10 @@ namespace Api.W.Movies.Controllers
             {
                 return Conflict(new { ex.Message });
             }
+            catch (InvalidOperationException ex) when (ex.Message.Contains("No se encontró"))
+            {
+                return NotFound(new { ex.Message });
+            }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);

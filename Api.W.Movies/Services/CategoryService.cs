@@ -98,6 +98,14 @@ namespace Api.W.Movies.Services
 
             //Actualizamos la categoria en el repositorio
             var categoryUpdated = await _categoryRepository.UpdateCategoryAsync(categoryExists);
+
+            if (!categoryUpdated)
+            {
+                throw new Exception("Ocurrio un error al actualizar la categoría.");
+            }
+
+            //Retornar el Dto actualizado
+            return _mapper.Map<CategoryDto>(categoryExists);
         }
     }
 }
