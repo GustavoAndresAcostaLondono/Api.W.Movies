@@ -34,6 +34,7 @@ namespace Api.W.Movies.Controllers
         {
             try
             {
+                //Arreglar errores de controlador de errores
                 var categoryDto = await _categoryService.GetCategoryAsync(id);
                 return Ok(categoryDto);
             }
