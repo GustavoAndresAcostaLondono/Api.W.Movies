@@ -101,7 +101,16 @@ namespace Api.W.Movies.Services
 
             if (nameExists)
             {
-                throw new InvalidOperationException($"Ya existe una película con el nombre de '{dto.Name}'");
+                throw new InvalidOperationException($"Ya existe otra película con el nombre de '{dto.Name}'");
+            }
+
+            //Validar que si se realicen cambios cambios
+            if (movieExists.Name == dto.Name &&
+                movieExists.Duration == dto.Duration &&
+                movieExists.Description == dto.Description &&
+                movieExists.Clasification == dto.Clasification)
+            {
+                throw new InvalidOperationException("No se detectaron cambios en la película. Debe modificar al menos un campo.");
             }
 
             //Mapear el DTO a la entidad
