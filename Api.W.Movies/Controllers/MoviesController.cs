@@ -62,7 +62,7 @@ namespace Api.W.Movies.Controllers
             {
                 var createdMovie = await _movieService.CreateMovieAsync(movieCreateDto);
 
-                //Vamos a retornar un 201 Created con la ruta para obtener la categoria creada
+                //Vamos a retornar un 201 Created con la ruta para obtener la película creada
                 return CreatedAtRoute("GetMovieAsync",              //Parametro 1: nombre de la ruta
                     new { id = createdMovie.Id },                     //Parametro 2: los valores de los parametros de la ruta
                     createdMovie                                     //Parametro 3: El objeto creado
