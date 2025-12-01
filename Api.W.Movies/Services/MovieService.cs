@@ -88,7 +88,7 @@ namespace Api.W.Movies.Services
 
         public async Task<MovieDto> UpdateMovieAsync(MovieCreateUpdateDto dto, int id)
         {
-            //Validar si la categoria ya existe
+            //Validar si la película ya existe
             var movieExists = await _movieRepository.GetMovieAsync(id);
 
             if (movieExists == null)
@@ -96,8 +96,8 @@ namespace Api.W.Movies.Services
                 throw new InvalidOperationException($"No se encontró la película con ID: '{id}'");
             }
 
-            //Verificar si el nuevo nombre de la categoria ya existe
-            var nameExists = await _movieRepository.MovieExistsByNameAsync(dto.Name);
+            //Verificar si el nuevo nombre de la película ya existe
+            var nameExists = await _movieRepository.MovieExistsByNameExcludingIdAsync(dto.Name, id);
 
             if (nameExists)
             {
@@ -107,7 +107,7 @@ namespace Api.W.Movies.Services
             //Mapear el DTO a la entidad
             _mapper.Map(dto, movieExists);
 
-            //Actualizamos la categoria en el repositorio
+            //Actualizamos la película en el repositorio
             var movieUpdated = await _movieRepository.UpdateMovieAsync(movieExists);
 
             if (!movieUpdated)

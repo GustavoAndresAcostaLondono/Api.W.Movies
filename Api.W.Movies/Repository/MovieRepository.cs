@@ -71,6 +71,13 @@ namespace Api.W.Movies.Repository
             return await SaveAsync();
         }
 
+        public async Task<bool> MovieExistsByNameExcludingIdAsync(string name, int id)
+        {
+            return await _context.Movies
+                .AsNoTracking()
+                .AnyAsync(m => m.Name == name && m.Id != id);
+        }
+
         private async Task<bool> SaveAsync()
         {
             return await _context.SaveChangesAsync() >= 0 ? true : false;

@@ -11,5 +11,6 @@ namespace Api.W.Movies.Repository.IRepository
         Task<bool> CreateMovieAsync(Movie movie);
         Task<bool> UpdateMovieAsync(Movie movie);
         Task<bool> DeleteMovieAsync(int id);
+        Task<bool> MovieExistsByNameExcludingIdAsync(string name, int id);
     }
 }
